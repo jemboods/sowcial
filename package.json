@@ -1,0 +1,19 @@
+{
+  "name": "sowcial",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sowcial - the social farming game where every farmer is an Agent ID (BNB Chain)",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network bscTestnet",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network bsc"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.6.1",
+    "dotenv": "^18.0.10",
+    "ethers": "^6.17.0",
+    "hardhat": "^2.29.2"
+  }
+}
