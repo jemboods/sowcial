@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sowcial — The social farming game where every farmer is an Agent ID</title>
+<meta name="description" content="Sowcial is a cozy on-chain farming game on BNB Chain. Claim land, plant crops, help your neighbors — your farm is your Agent ID.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-logo">🌾</div>
+      <div>
+        <h1>Sowcial</h1>
+        <p class="tagline">The social farming game where every farmer is an Agent ID</p>
+      </div>
+    </div>
+    <div class="wallet-box">
+      <div id="seasonBanner" class="season-banner">🌱 Season loading…</div>
+      <button id="connectBtn" class="btn btn-primary">Connect Wallet</button>
+      <div id="walletInfo" class="wallet-info hidden">
+        <span id="walletName" class="wallet-name"></span>
+        <span id="walletBadge" class="badge"></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <div id="statusBar" class="status-bar hidden"></div>
+  <div id="deployNotice" class="notice notice-warm hidden">
+    🚧 The Sowcial farm contract is being planted on BNB Chain mainnet — the game opens as soon as deployment is complete. You can already browse how everything works below!
+  </div>
+  <div id="holderNotice" class="notice notice-warm hidden">
+    🌱 To play Sowcial you need a <strong>Binance Agent ID</strong> (a <code>.ai</code> name for your Agentic Wallet).
+    Open the <strong>Binance App → Wallet → tap the Agent ID banner</strong> on the homepage and claim yours — it’s free.
+    You can still browse everyone’s farms below in read-only mode.
+  </div>
+
+  <!-- My farm / claim / stats -->
+  <section id="myFarmSection" class="card">
+    <h2>🏡 My Farm</h2>
+    <div id="myFarmBody">
+      <p class="muted">Connect your wallet to claim your farm and start growing.</p>
+    </div>
+  </section>
+
+  <!-- Farm grid -->
+  <section class="card">
+    <div class="section-head">
+      <h2 id="farmTitle">🌻 Farm</h2>
+      <span id="farmOwnerLine" class="muted"></span>
+    </div>
+    <div id="farmGrid" class="farm-grid">
+      <p class="muted grid-placeholder">Connect a wallet or visit a neighbor’s farm below to see its plots.</p>
+    </div>
+    <p class="hint">💧 Water a crop before harvest for ×1.5 Dewpoints. Planting in-season pays full points — out of season pays half.</p>
+  </section>
+
+  <!-- Neighbors / leaderboard -->
+  <section class="card">
+    <h2>🏆 Neighbors &amp; Leaderboard</h2>
+    <p class="hint">Helping a neighbor waters their farm in spirit: <strong>you earn 3 Dewpoints, they earn 2</strong>. You can help each neighbor once per day. You need your own farm to help.</p>
+    <div class="visit-row">
+      <input id="visitInput" type="text" placeholder="Visit a farm by address — 0x…" spellcheck="false">
+      <button id="visitBtn" class="btn btn-secondary">Visit farm</button>
+      <button id="backToMineBtn" class="btn btn-ghost hidden">Back to my farm</button>
+    </div>
+    <div id="leaderboard">
+      <p class="muted">Loading farmers…</p>
+    </div>
+  </section>
+
+  <!-- How to play -->
+  <section class="card">
+    <h2>📖 How to Play</h2>
+    <ol class="steps">
+      <li><strong>Claim your farm — free.</strong> Connect a wallet that holds a Binance Agent ID and claim your 3×3 farm. One Agent ID = one farm, forever.</li>
+      <li><strong>Plant.</strong> Pick a plot and a crop: 🥬 Turnip (10 min), 🍈 Star Melon (1 hour) or 🎃 Pumpkin (6 hours). Every crop has its season — seasons rotate every 3 days.</li>
+      <li><strong>Water.</strong> Water a growing crop to multiply its harvest by <strong>×1.5 Dewpoints</strong>.</li>
+      <li><strong>Harvest.</strong> When the timer finishes, harvest for Dewpoints and produce. In-season crops pay full points; out-of-season crops pay half and yield a little less.</li>
+      <li><strong>Help your neighbors.</strong> Visit other Agent ID farmers and help them — you both earn Dewpoints. Grow together!</li>
+    </ol>
+    <div class="honest-box">
+      <h3>Honest notes 🤝</h3>
+      <ul>
+        <li><strong>No token.</strong> There is nothing to buy, sell, or speculate on.</li>
+        <li><strong>Dewpoints are a non-transferable score</strong> stored in the game contract — they can’t be withdrawn or traded.</li>
+        <li><strong>The contract holds no funds.</strong> It never custodies your money.</li>
+        <li><strong>Playing costs only BNB Chain gas</strong> — a fraction of a cent per action at typical gas prices.</li>
+      </ul>
+    </div>
+    <p class="links-row">
+      <a id="bscscanLink" href="#" target="_blank" rel="noopener">🔍 Game contract on BscScan</a>
+      <a href="https://github.com/jemboods/sowcial" target="_blank" rel="noopener">💻 Source code on GitHub</a>
+      <a href="https://www.binance.com/en/support/announcement/detail/95f5dbe0ea674a48a739b59e046648bf" target="_blank" rel="noopener">🏅 Agent ID Hackathon</a>
+    </p>
+  </section>
+
+  <footer class="site-footer">
+    <p>Sowcial 🌾 — grown with care on BNB Chain for the Binance Agent ID Hackathon. Not financial advice; just farming.</p>
+  </footer>
+</main>
+
+<!-- Crop picker modal -->
+<div id="cropModal" class="modal-backdrop hidden">
+  <div class="modal">
+    <h3>🫘 Choose a crop for plot <span id="cropModalPlot"></span></h3>
+    <div id="cropList" class="crop-list"></div>
+    <button id="cropModalClose" class="btn btn-ghost">Cancel</button>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
